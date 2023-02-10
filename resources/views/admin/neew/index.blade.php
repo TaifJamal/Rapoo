@@ -29,12 +29,18 @@
                     <td>{!! $neew->content !!}</td>
                     <td><img src="{{ asset('image/neew/'.$neew->image) }}" width="80" alt=""></td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('admin.neews.edit', $neew->id) }}"><i class="fas fa-edit"></i></a>
-                        <form class="d-inline" action="{{ route('admin.neews.destroy', $neew->id) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure')"><i class="fas fa-trash"></i></button>
-                        </form>
+                        @can('neew-edit')
+                         <a class="btn btn-primary" href="{{ route('admin.neews.edit', $neew->id) }}"><i class="fas fa-edit"></i></a>
+                        @endcan
+                        @can('neew-delete')
+                            <form class="d-inline" action="{{ route('admin.neews.destroy', $neew->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure')"><i class="fas fa-trash"></i></button>
+                            </form>
+                        @endcan
+
+
                     </td>
                 </tr>
             @endforeach

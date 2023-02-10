@@ -29,12 +29,18 @@
                     <td>{!! $testimonial->comment !!}</td>
                     <td><img src="{{ asset('image/testimonial/'.$testimonial->image)}}" width="80"  alt=""></td>
                     <td>
+                        @can('testimonial-edit')
                         <a class="btn btn-primary" href="{{ route('admin.testimonials.edit', $testimonial->id) }}"><i class="fas fa-edit"></i></a>
+                        @endcan
+                        @can('testimonial-delete')
                         <form class="d-inline" action="{{ route('admin.testimonials.destroy', $testimonial->id) }}" method="POST">
                             @csrf
                             @method('delete')
                         <button class="btn btn-danger" onclick="return confirm('Are you sure')"><i class="fas fa-trash"></i></button>
                         </form>
+                        @endcan
+
+
                     </td>
                 </tr>
             @endforeach

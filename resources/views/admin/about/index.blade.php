@@ -29,12 +29,18 @@
                     <td>{!! $about->content !!}</td>
                     <td>{{ $about->type }}</td>
                     <td>
+                        @can('about-edit')
                         <a class="btn btn-primary" href="{{ route('admin.abouts.edit', $about->id) }}"><i class="fas fa-edit"></i></a>
+                        @endcan
+                        @can('about-delete')
                         <form class="d-inline" action="{{ route('admin.abouts.destroy', $about->id) }}" method="POST">
                             @csrf
                             @method('delete')
                         <button class="btn btn-danger" onclick="return confirm('Are you sure')"><i class="fas fa-trash"></i></button>
                         </form>
+                        @endcan
+
+
                     </td>
                 </tr>
             @endforeach

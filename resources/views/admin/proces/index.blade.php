@@ -27,12 +27,18 @@
                     <td>{{ $proces->titel }}</td>
                     <td>{!! $proces->content !!}</td>
                     <td>
+                        @can('proces-edit')
                         <a class="btn btn-primary" href="{{ route('admin.proces.edit', $proces->id) }}"><i class="fas fa-edit"></i></a>
+                        @endcan
+                        @can('proces-delete')
                         <form class="d-inline" action="{{ route('admin.proces.destroy', $proces->id) }}" method="POST">
                             @csrf
                             @method('delete')
                         <button class="btn btn-danger" onclick="return confirm('Are you sure')"><i class="fas fa-trash"></i></button>
                         </form>
+                        @endcan
+
+
                     </td>
                 </tr>
             @endforeach

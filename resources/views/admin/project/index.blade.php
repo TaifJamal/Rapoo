@@ -34,12 +34,16 @@
                     <td>{{ $project->About->titel }}</td>
 
                     <td>
+                        @can('project-edit')
                         <a class="btn btn-primary" href="{{ route('admin.projects.edit', $project->id) }}"><i class="fas fa-edit"></i></a>
-                        <form class="d-inline" action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
-                            @csrf
-                            @method('delete')
+                        @endcan
+                       @can('project-delete')
+                       <form class="d-inline" action="{{ route('admin.projects.destroy', $project->id) }}" method="POST">
+                        @csrf
+                        @method('delete')
                         <button class="btn btn-danger" onclick="return confirm('Are you sure')"><i class="fas fa-trash"></i></button>
                         </form>
+                       @endcan
                     </td>
                 </tr>
             @endforeach

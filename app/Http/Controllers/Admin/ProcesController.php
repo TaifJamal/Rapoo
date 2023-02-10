@@ -14,6 +14,13 @@ class ProcesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:proces-list|proces-create|proces-edit|proces-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:proces-create', ['only' => ['create','store']]);
+         $this->middleware('permission:proces-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:proces-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $process=Proces::all();

@@ -14,6 +14,13 @@ class NeewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:neew-list|neew-create|neew-edit|neew-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:neew-create', ['only' => ['create','store']]);
+         $this->middleware('permission:neew-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:neew-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $neews=Neew::all();
